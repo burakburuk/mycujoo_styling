@@ -1,0 +1,22 @@
+@import "shared";
+
+.control-button {
+  @extend %center-content;
+  background-color: #e04b37;
+  color: #fff;
+  font-size: 2em;
+  width: 35px;
+  height: 35px;
+  margin: 5px;
+  border: 1px solid #e04b37;
+  display: inline-flex;
+  border-radius: 50%;
+  line-height: 30px;
+  text-align: center;
+}
+
+.control-button:hover {
+  cursor: pointer;
+  background-color: #ffffff;
+  color: #e04b37;
+}

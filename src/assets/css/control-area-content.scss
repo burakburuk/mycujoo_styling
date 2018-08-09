@@ -1,0 +1,45 @@
+@import "shared";
+
+.control-area-content {
+  color: #fff;
+
+  div {
+    display: inline-block;
+  }
+
+  .toggle-button {
+    position: relative;
+    top: -22px;
+    border-radius: 50%;
+    background-color: #eaeaeb;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, .08);
+    height: 3.5em;
+    width: 3.5em;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 4px;
+    transition: all .2s ease-in-out;
+
+    img {
+      object-fit: contain;
+      height: 3.4em;
+      width: 3.4em;
+      vertical-align: middle;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .toggle-button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+
+  span {
+    @extend %center-content;
+  }
+}
