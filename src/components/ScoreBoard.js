@@ -4,26 +4,31 @@ import awayLogo from '../assets/img/ger-logo.png';
 import '../assets/css/score-board.scss';
 
 const ScoreBoard = (props) => {
-    const {scoreOpen, scoreHomeAnimation, scoreAwayAnimation, homeName, homeScore, awayName, awayScore} = props;
+    const {
+        scoreOpen, scoreHomeAnimation, scoreAwayAnimation, homeName, homeScore, oldHomeScore,
+        awayName, awayScore, oldAwayScore
+    } = props;
     return (
         <div className={"score-board" + (!scoreOpen ? " hidden" : "")}>
             <div className="logo">
                 <img src={homeLogo} alt="home_logo"/>
             </div>
             <div className="name">
-                <span>{homeName}</span>
+                {homeName}
             </div>
-            <div className={"score" + (scoreHomeAnimation ? " slideDown" : "")}>
-                {homeScore}
+            <div oldscorevalue={oldHomeScore} newscorevalue={homeScore}
+                 className={"score" + (scoreHomeAnimation ? " slideDown" : "")}>
+                {!scoreHomeAnimation ? homeScore : ""}
             </div>
             <div className="score-separator">
                 <span>-</span>
             </div>
-            <div className={"score" + (scoreAwayAnimation ? " slideDown" : "")}>
-                {awayScore}
+            <div oldscorevalue={oldAwayScore} newscorevalue={awayScore}
+                 className={"score" + (scoreAwayAnimation ? " slideDown" : "")}>
+                {!scoreAwayAnimation ? awayScore : ""}
             </div>
             <div className="name">
-                <span>{awayName}</span>
+                {awayName}
             </div>
             <div className="logo">
                 <img src={awayLogo} alt="away_logo"/>

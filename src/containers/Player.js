@@ -11,17 +11,22 @@ class Player extends Component {
         this.state = {
             homeName: 'PAN',
             homeScore: 0,
+            oldHomeScore: 0,
             awayName: 'GER',
             awayScore: 0,
+            oldAwayScore: 0,
             scoreOpen: true,
             scoreHomeAnimation: false,
-            scoreAwayAnimation: false
+            scoreAwayAnimation: false,
+            isScoreChanging: false
         }
     }
 
     componentDidUpdate(prevProps, prevState) {
         const {scoreHomeAnimation, scoreAwayAnimation} = this.state;
-        let newState = {};
+        let newState = {
+            isScoreChanging: false
+        };
         if (scoreHomeAnimation) {
             newState.scoreHomeAnimation = false;
         }
@@ -34,36 +39,52 @@ class Player extends Component {
             typeof newState.scoreAwayAnimation !== "undefined") {
             setTimeout(() => {
                 this.setState(newState);
-            }, 1000);
+            }, 900);
         }
     }
 
     handleHomeDecrement = () => {
-        this.setState((prevState, props) => ({
-            homeScore: (prevState.homeScore - 1 >= 0) ? prevState.homeScore - 1 : prevState.homeScore,
-            scoreHomeAnimation: true
-        }));
+        if (!this.state.isScoreChanging) {
+            this.setState((prevState, props) => ({
+                homeScore: (prevState.homeScore - 1 >= 0) ? prevState.homeScore - 1 : prevState.homeScore,
+                oldHomeScore: prevState.homeScore,
+                scoreHomeAnimation: true,
+                isScoreChanging: true
+            }));
+        }
     };
 
     handleHomeIncrement = () => {
-        this.setState((prevState, props) => ({
-            homeScore: prevState.homeScore + 1,
-            scoreHomeAnimation: true
-        }));
+        if (!this.state.isScoreChanging) {
+            this.setState((prevState, props) => ({
+                homeScore: prevState.homeScore + 1,
+                oldHomeScore: prevState.homeScore,
+                scoreHomeAnimation: true,
+                isScoreChanging: true
+            }));
+        }
     };
 
     handleAwayDecrement = () => {
-        this.setState((prevState, props) => ({
-            awayScore: (prevState.awayScore - 1 >= 0) ? prevState.awayScore - 1 : prevState.awayScore,
-            scoreAwayAnimation: true
-        }));
+        if (!this.state.isScoreChanging) {
+            this.setState((prevState, props) => ({
+                awayScore: (prevState.awayScore - 1 >= 0) ? prevState.awayScore - 1 : prevState.awayScore,
+                oldAwayScore: prevState.awayScore,
+                scoreAwayAnimation: true,
+                isScoreChanging: true
+            }));
+        }
     };
 
     handleAwayIncrement = () => {
-        this.setState((prevState, props) => ({
-            awayScore: prevState.awayScore + 1,
-            scoreAwayAnimation: true
-        }));
+        if (!this.state.isScoreChanging) {
+            this.setState((prevState, props) => ({
+                awayScore: prevState.awayScore + 1,
+                oldAwayScore: prevState.awayScore,
+                scoreAwayAnimation: true,
+                isScoreChanging: true
+            }));
+        }
     };
 
     handleScoreToggle = () => {
@@ -75,6 +96,7 @@ class Player extends Component {
     render() {
         return (
             <div className="container">
+                <div className="header-area"></div>
                 <div className="sixteen-nine">
                     <div className="content">
                         <ScoreBoard {...this.state}/>
