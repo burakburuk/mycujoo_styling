@@ -44,22 +44,23 @@
   font-size: 2em;
 }
 
-.slideDown::before {
+%slideDown-shared {
   position: absolute;
-  content: attr(newscorevalue);
-  animation-name: slideDownNewScore;
   animation-duration: 1s;
   animation-timing-function: ease;
   visibility: visible !important;
 }
 
+.slideDown::before {
+  @extend %slideDown-shared;
+  content: attr(newscorevalue);
+  animation-name: slideDownNewScore;
+}
+
 .slideDown::after {
-  position: absolute;
+  @extend %slideDown-shared;
   content: attr(oldscorevalue);
   animation-name: slideDownOldScore;
-  animation-duration: 1s;
-  animation-timing-function: ease;
-  visibility: visible !important;
 }
 
 @keyframes slideDownNewScore {
