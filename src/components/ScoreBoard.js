@@ -4,7 +4,7 @@ import awayLogo from '../assets/img/ger-logo.png';
 import '../assets/css/score-board.scss';
 
 const ScoreBoard = (props) => {
-    const {scoreOpen, homeName, homeScore, awayName, awayScore} = props;
+    const {scoreOpen, scoreHomeAnimation, scoreAwayAnimation, homeName, homeScore, awayName, awayScore} = props;
     return (
         <div className={"score-board" + (!scoreOpen ? " hidden" : "")}>
             <div className="logo">
@@ -13,13 +13,13 @@ const ScoreBoard = (props) => {
             <div className="name">
                 <span>{homeName}</span>
             </div>
-            <div className="score">
+            <div className={"score" + (scoreHomeAnimation ? " slideDown" : "")}>
                 {homeScore}
             </div>
             <div className="score-separator">
                 <span>-</span>
             </div>
-            <div className="score">
+            <div className={"score" + (scoreAwayAnimation ? " slideDown" : "")}>
                 {awayScore}
             </div>
             <div className="name">
@@ -30,6 +30,11 @@ const ScoreBoard = (props) => {
             </div>
         </div>
     );
+};
+
+ScoreBoard.defaultProps = {
+    scoreHomeChanged: false,
+    scoreAwayChanged: false,
 };
 
 export default ScoreBoard;

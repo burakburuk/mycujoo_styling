@@ -13,31 +13,56 @@ class Player extends Component {
             homeScore: 0,
             awayName: 'GER',
             awayScore: 0,
-            scoreOpen: true
+            scoreOpen: true,
+            scoreHomeAnimation: false,
+            scoreAwayAnimation: false
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        const {scoreHomeAnimation, scoreAwayAnimation} = this.state;
+        let newState = {};
+        if (scoreHomeAnimation) {
+            newState.scoreHomeAnimation = false;
+        }
+
+        if (scoreAwayAnimation) {
+            newState.scoreAwayAnimation = false;
+        }
+
+        if (typeof newState.scoreHomeAnimation !== "undefined" ||
+            typeof newState.scoreAwayAnimation !== "undefined") {
+            setTimeout(() => {
+                this.setState(newState);
+            }, 1000);
         }
     }
 
     handleHomeDecrement = () => {
         this.setState((prevState, props) => ({
-            homeScore: (prevState.homeScore - 1 >= 0) ? prevState.homeScore - 1 : prevState.homeScore
+            homeScore: (prevState.homeScore - 1 >= 0) ? prevState.homeScore - 1 : prevState.homeScore,
+            scoreHomeAnimation: true
         }));
     };
 
     handleHomeIncrement = () => {
         this.setState((prevState, props) => ({
-            homeScore: prevState.homeScore + 1
+            homeScore: prevState.homeScore + 1,
+            scoreHomeAnimation: true
         }));
     };
 
     handleAwayDecrement = () => {
         this.setState((prevState, props) => ({
-            awayScore: (prevState.awayScore - 1 >= 0) ? prevState.awayScore - 1 : prevState.awayScore
+            awayScore: (prevState.awayScore - 1 >= 0) ? prevState.awayScore - 1 : prevState.awayScore,
+            scoreAwayAnimation: true
         }));
     };
 
     handleAwayIncrement = () => {
         this.setState((prevState, props) => ({
-            awayScore: prevState.awayScore + 1
+            awayScore: prevState.awayScore + 1,
+            scoreAwayAnimation: true
         }));
     };
 
@@ -52,9 +77,7 @@ class Player extends Component {
             <div className="container">
                 <div className="sixteen-nine">
                     <div className="content">
-                        <ScoreBoard scoreOpen={this.state.scoreOpen} homeName={this.state.homeName}
-                                    homeScore={this.state.homeScore}
-                                    awayName={this.state.awayName} awayScore={this.state.awayScore}/>
+                        <ScoreBoard {...this.state}/>
                         <div className="player-image">
                             <img src={playButton} alt="play_button"/>
                         </div>
