@@ -96,7 +96,6 @@ class Player extends Component {
     render() {
         return (
             <div className="container">
-                <div className="header-area"></div>
                 <div className="sixteen-nine">
                     <div className="content">
                         <ScoreBoard {...this.state}/>
